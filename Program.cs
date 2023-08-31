@@ -1,7 +1,13 @@
+using auth;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<ApplicationContext>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
