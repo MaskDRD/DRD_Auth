@@ -1,4 +1,6 @@
+using auth.Model;
 using Microsoft.AspNetCore.Mvc;
+using auth;
 
 namespace auth.Controllers
 {

@@ -1,8 +1,5 @@
 using auth;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
