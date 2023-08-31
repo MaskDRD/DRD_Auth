@@ -1,6 +1,8 @@
 using auth.Model;
 using Microsoft.AspNetCore.Mvc;
 using auth;
+using auth.Service;
+using auth.DTO;
 
 namespace auth.Controllers
 {
@@ -8,17 +10,20 @@ namespace auth.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly ILogger<AuthController> _logger;
+        private readonly ILogger<AuthController> logger;
+        private readonly AuthService authService;
 
-        public AuthController(ILogger<AuthController> logger)
+        public AuthController(ILogger<AuthController> logger, AuthService authService)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.authService = authService;
         }
 
         [Route("register")]
         [HttpPost()]
-        public string Register()
+        public string Register([FromBody] UserDtoCreated userDtoCreated)
         {
+            authService.Register(userDtoCreated);
             return "Регистрация";
         }
 
