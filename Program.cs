@@ -1,13 +1,18 @@
 using auth;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if( connectionString == null ) {
+    throw new Exception("Подключение к бд отсутсвует");
+}
 
-builder.Services.AddDbContext<ApplicationContext>();
-
+builder.Services.AddDbContext<ApplicationContext>(options =>  options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
