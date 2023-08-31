@@ -1,15 +1,16 @@
 using auth;
+using auth.Repository;
+using auth.Service;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-if( connectionString == null ) {
-    throw new Exception("Подключение к бд отсутсвует");
-}
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new Exception("Подключение к бд отсутсвует");
 
 builder.Services.AddDbContext<ApplicationContext>(options =>  options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddTransient<UserRepository>();
+builder.Services.AddTransient<AuthService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
