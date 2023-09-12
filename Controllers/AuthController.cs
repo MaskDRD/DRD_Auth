@@ -1,6 +1,4 @@
-using auth.Model;
 using Microsoft.AspNetCore.Mvc;
-using auth;
 using auth.Service;
 using auth.DTO;
 
@@ -23,6 +21,7 @@ namespace auth.Controllers
         [HttpPost()]
         public string Register([FromBody] UserDtoCreated userDtoCreated)
         {
+            Console.WriteLine("1");
             authService.Register(userDtoCreated);
             return "Регистрация";
         }

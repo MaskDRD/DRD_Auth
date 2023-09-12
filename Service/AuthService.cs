@@ -1,7 +1,6 @@
 ﻿using auth.DTO;
 using auth.Model;
 using auth.Repository;
-using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 
 namespace auth.Service

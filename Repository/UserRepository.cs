@@ -10,6 +10,11 @@ namespace auth.Repository
             this.aplicationContext = aplicationContext;
         }
 
+        public List<UserModel> GetUserAll()
+        {
+            return aplicationContext.userModel.ToList();
+        }
+
         public void CreateUser(UserModel userModel)
         {
             aplicationContext.userModel.Add(userModel);
