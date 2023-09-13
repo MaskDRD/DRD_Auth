@@ -1,5 +1,4 @@
 using auth;
-using auth.ExceptionCustom;
 using auth.Repository;
 using auth.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,6 +40,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

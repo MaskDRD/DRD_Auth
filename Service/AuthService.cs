@@ -9,10 +9,12 @@ namespace auth.Service
     {
        private readonly SHA256 Sha256 = SHA256.Create();
        private readonly UserRepository userRepository;
-       public AuthService(UserRepository userRepository)
+        private readonly UserServer userServer;
+        public AuthService(UserRepository userRepository, UserServer userServer)
        {
-            this.userRepository = userRepository; 
-       }
+            this.userRepository = userRepository;
+            this.userServer = userServer;
+        }
 
         private string HashPassword(string? password)
         {
@@ -47,6 +49,7 @@ namespace auth.Service
         {
             UserModel userModel = ConvertUserDtoCreatedToUserModel(userDtoCreated);
             userRepository.CreateUser(userModel);
+            userServer.SaveCacheUserId(userModel);
         }
     }
 }

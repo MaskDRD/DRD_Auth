@@ -16,31 +16,35 @@ namespace auth.Service
         )
         {
             this.cache = cache;
-            this.userRepository = userRepository;  
+            this.userRepository = userRepository;
+            if (cache.Get<UserModel>(GetKeyUserCath(1))?.Id == null)
+            {
+                SaveCacheUserAll();
+            }
         }
 
-        private void saveCacheUserAll()
+        private void SaveCacheUserAll()
         {
             List<UserModel> userModelList = this.userRepository.GetUserAll();
             foreach (UserModel userModel in userModelList)
             {
-                saveCacheUserId(userModel);
+                SaveCacheUserId(userModel);
             }
         }
 
-        private void saveCacheUserId(UserModel userModel)
+        public void SaveCacheUserId(UserModel userModel)
         {
-            cache.Set(getKeyUserCath(userModel.Id), userModel);
+            cache.Set(GetKeyUserCath(userModel.Id), userModel);
         }
 
-        private string getKeyUserCath(int id)
+        private string GetKeyUserCath(int id)
         {
             return nameCache + id;
         }
 
-        public UserModel getUser(int id)
+        public UserModel? GetUser(int id)
         {
-            string key = getKeyUserCath(id);
+            string key = GetKeyUserCath(id);
             if (cache.Get<UserModel>(key) != null)
             {
                 return cache.Get<UserModel>(key);

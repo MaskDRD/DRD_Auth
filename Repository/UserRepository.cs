@@ -15,10 +15,10 @@ namespace auth.Repository
             return aplicationContext.userModel.ToList();
         }
 
-        public void CreateUser(UserModel userModel)
+        public int CreateUser(UserModel userModel)
         {
             aplicationContext.userModel.Add(userModel);
-            aplicationContext.SaveChanges();
+            return aplicationContext.SaveChanges();
         }
 
     }
